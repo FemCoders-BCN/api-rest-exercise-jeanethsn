@@ -1,23 +1,38 @@
-import React from 'react'
-import Navbar from '../../components/navbar/Navbar'
+import React, { useState, useEffect } from 'react';
+import { LoremPicsumService } from '../../services/LoremPicsumService';
+import Navbar from '../../components/navbar/Navbar';
 
+const RandomGrayscaleImagePage = () => {
+  const [imageData, setImageData] = useState(null);
 
-function GrayscalePage() {
+  useEffect(() => {
+    const loremPicsumService = LoremPicsumService();
+
+    loremPicsumService.getRandomGrayscale('200/300') // Tamaño de la imagen
+      .then(response => {
+        setImageData(response.data);
+      })
+      .catch(error => {
+        console.error('Error in getRandomGrayscale:', error);
+      });
+  }, []);
+
   return (
-    <main>
-        <h2>Aquí estará la imagen aleatoria en escala de grises de la tercera llamada</h2>
-        <Navbar/>
-        <ul>
-            <p>INSTRUCCIONES</p>
-            <li>Crea los componentes que necesites para imprimir lo siguiente (siguiendo el ejemplo del componente PictureObject):</li>
-            <ol>
-                <li>La fotografía (queremos ver la imagen en nuestra app, no queremos la url).</li>
-            </ol>
-            <li>Has de borrar estas instrucciones cuando lo tengas.</li>
-            <li>Los estilos los has de realizar tú misma.</li>
-        </ul>
-    </main>
-  )
-}
+    <div>
+      <h1>Random Grayscale Image Page</h1>
+      <Navbar />
 
-export default GrayscalePage
+      <div className="random-image-container">
+        {imageData && (
+          <>
+            <img src={imageData.url} alt="Random Grayscale Img" />
+            <p>ID: {imageData.id}</p>
+            <p>Autor: {imageData.author}</p>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default RandomGrayscaleImagePage;
