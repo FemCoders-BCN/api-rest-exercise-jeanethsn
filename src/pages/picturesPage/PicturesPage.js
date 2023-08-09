@@ -1,26 +1,38 @@
-import React from 'react'
 import Navbar from '../../components/navbar/Navbar'
-import PictureObject from '../../components/pictureObject/PictureObject'
+import React, { useState, useEffect } from 'react';
+import { LoremPicsumService } from '../../services/LoremPicsumService';
+import PictureObject from '../../components/pictureObject/PictureObject';
+import logo from '../../assets/img/logo.svg';
 
-function PicturesPage() {
+const PicturesPage = () => {
+  
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    const loremPicsumService = LoremPicsumService();
+
+    loremPicsumService.getAll()
+      .then(response => {
+        setImages(response.data);
+      })
+      .catch(error => {
+        console.error('Error in getAll:', error);
+      });
+  }, []);
+
   return (
-    <main>
-        <h2>Aquí estarán todos los objetos de la primera llamada</h2>
-        <Navbar/>
-        <ul>
-            <p>INSTRUCCIONES</p>
-            <li>Crea los componentes que necesites para imprimir una lista o tarjetas que contengan lo siguiente (deberán estar todos los objetos de la llamada a la API):</li>
-            <ol>
-                <li>El id de la imagen.</li>
-                <li>Su autor.</li>
-                <li>La fotografía (queremos ver la imagen en nuestra app, no queremos la url).</li>
-            </ol>
-            <li>Has de borrar estas instrucciones cuando lo tengas.</li>
-            <li>Los estilos los has de realizar tú misma.</li>
-        </ul>
-        <PictureObject/>
-    </main>
-  )
-}
+    <div>
+      <img className='logo' src={logo} alt="logo of the app" />
+      <h1>Pictures Page</h1>
+      <Navbar/>
+      
+      <div className="card-container">
+        {images.map(image => (
+          <PictureObject key={image.id} id={image.id} author={image.author} imageUrl={image.download_url} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
-export default PicturesPage
+export default PicturesPage;

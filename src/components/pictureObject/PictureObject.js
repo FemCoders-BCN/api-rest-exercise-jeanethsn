@@ -1,9 +1,17 @@
 import React from 'react'
+import './PictureObject.css'; 
 
-function PictureObject() {
+
+const PictureObject = ({ id, author, imageUrl }) => {
   return (
-    <div>En este componente desarrollarás la lógica y la estructura de los objetos</div>
-  )
-}
+    <div className="card">
+      <img src={imageUrl} alt={author} />
+      <p>ID: {id}</p>
+      <p>Autor: {author}</p>
+    </div>
+  );
+};
 
-export default PictureObject
+export default PictureObject;
+ 
+

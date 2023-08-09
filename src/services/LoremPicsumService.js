@@ -9,6 +9,7 @@ export const LoremPicsumService = () => {
   const urlGetAll = '/v2/list';
   //Los endpoints que tienen llaves con un texto dentro, quiere decir que le has de pasar algún valor /id/{image}/{size}, eso significa que image y size son valores que te dirá la documentación cómo se pasan.
   const urlGetById = '/id/{image}/{size}';
+  const urlGetGrayscale = '/id/{image}/{size}?grayscale'; 
   /* Construye la url para el tercer endpoint
   const urlGetGrayscale = ''; */
 
@@ -28,6 +29,8 @@ export const LoremPicsumService = () => {
 
   return {
     getAll,
+    getById,
+    getRandomGrayscale
     //Deberás retornar el método para que puedas exportarlo
   }
 }
