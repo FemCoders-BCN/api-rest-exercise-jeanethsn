@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
 import PicturesPage from '../pages/picturesPage/PicturesPage';
 import FavoritesPage from '../pages/favoritesPage/FavoritesPage';
-import IdPage from '../pages/idPage/IdPage';
+import IdPage from '../pages/PictureId/PictureId';
 import GrayscalePage from '../pages/grayscalePage/GrayscalePage';
 
 
