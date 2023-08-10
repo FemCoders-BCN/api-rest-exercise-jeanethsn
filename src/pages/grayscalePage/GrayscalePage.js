@@ -1,38 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { LoremPicsumService } from '../../services/LoremPicsumService';
+import React, { useState } from 'react';
+import logo from '../../assets/img/logo.svg';
 import Navbar from '../../components/navbar/Navbar';
 
-const RandomGrayscaleImagePage = () => {
-  const [imageData, setImageData] = useState(null);
+const GrayscalePage = () => {
+  const [imageURL, setImageURL] = useState('');
 
-  useEffect(() => {
-    const loremPicsumService = LoremPicsumService();
+  const getRandomGrayscaleImage = () => {
+    const randomTimestamp = Date.now();
+    const grayscaleURL = `https://picsum.photos/200/300?grayscale&random=${randomTimestamp}`;
+    setImageURL(grayscaleURL);
+  };
 
-    loremPicsumService.getRandomGrayscale('200/300') // Tamaño de la imagen
-      .then(response => {
-        setImageData(response.data);
-      })
-      .catch(error => {
-        console.error('Error in getRandomGrayscale:', error);
-      });
-  }, []);
+  if (!imageURL) {
+    getRandomGrayscaleImage(); // Llamada inicial para generar la primera imagen
+  }
 
   return (
     <div>
-      <h1>Random Grayscale Image Page</h1>
+      <img className='logo' src={logo} alt="logo of the app" />
+      <h1>Grayscale Image Page</h1>
       <Navbar />
-
-      <div className="random-image-container">
-        {imageData && (
-          <>
-            <img src={imageData.url} alt="Random Grayscale Img" />
-            <p>ID: {imageData.id}</p>
-            <p>Autor: {imageData.author}</p>
-          </>
-        )}
+      <div>
+        <img src={imageURL} alt="Grayscale Image" />
+        <button onClick={getRandomGrayscaleImage}>Get Random Grayscale Image</button>
       </div>
     </div>
   );
 };
 
-export default RandomGrayscaleImagePage;
+export default GrayscalePage;
