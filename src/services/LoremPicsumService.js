@@ -1,33 +1,17 @@
-import axios from "axios";
-
-axios.defaults.baseURL = 'https://picsum.photos';
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-axios.defaults.headers.post['Accept'] = 'application/json';
+// LoremPicsumService.js
+import makeRequest from './apiUtils';
 
 export const LoremPicsumService = () => {
   const urlGetAll = '/v2/list';
   const urlGetById = '/id/{image}/{size}';
-  const urlGetGrayscale = 'https://picsum.photos/200/300?grayscale'; // Usar el endpoint correcto
-
-  const getAll = () => {
-    const response = axios.get(urlGetAll);
-    return response;
-  };
-
-  const getById = (id, size) => {
-    const response = axios.get(`${urlGetById}/${id}/${size}`);
-    return response;
-  };
-
-  const getRandomGrayscale = (size) => {
-    const url = urlGetGrayscale.replace('{size}', size);
-    const response = axios.get(url);
-    return response;
-  };
+  const urlGetGrayscale = '/{size}?grayscale';
 
   return {
-    getAll,
-    getById,
-    getRandomGrayscale,
+    getAll: () => makeRequest('get', urlGetAll),
+    getById: (id, size) => makeRequest('get', `${urlGetById}/${id}/${size}`),
+    getRandomGrayscale: (size) => {
+      const url = urlGetGrayscale.replace('{size}', size);
+      return makeRequest('get', url);
+    },
   };
 };

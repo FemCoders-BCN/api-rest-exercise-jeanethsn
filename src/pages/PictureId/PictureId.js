@@ -49,7 +49,7 @@ const PicturesId = () => {
             key={image.id}
             onClick={() => handleChangeImage(image.id)}
           >
-            Show Image {image.id}
+            Id: {image.id}
           </button>
         ))}
       </div>
