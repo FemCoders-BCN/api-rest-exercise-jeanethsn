@@ -1,0 +1,19 @@
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Opcional: establece la altura total de la ventana gráfica */
+  }
+  
+  .grayscale-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px; /* Opcional: para agregar espacio entre el encabezado y el contenido */
+  }
+  
+  .button-container {
+    margin-top: 20px; /* Opcional: para agregar espacio entre la imagen y el botón */
+  }
+  

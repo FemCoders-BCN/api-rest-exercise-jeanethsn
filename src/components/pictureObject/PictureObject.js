@@ -1,5 +1,6 @@
 import React from 'react';
 import './PictureObject.css';
+import Button from '../button/button';
 
 const PictureObject = ({ id, author, imageUrl, onAddToFavorites }) => {
   return (
@@ -7,7 +8,8 @@ const PictureObject = ({ id, author, imageUrl, onAddToFavorites }) => {
       <img src={imageUrl} alt={author} />
       <p>ID: {id}</p>
       <p>Autor: {author}</p>
-      <button onClick={onAddToFavorites}>Añadir a Favoritos</button>
+
+      <Button className='action-buttons' text='Añadir a Favoritos'  onClick={onAddToFavorites} />
     </div>
   );
 };

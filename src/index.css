@@ -21,7 +21,7 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-a {
+.nav-buttons {
     border: 1px solid var(--main-color);
     padding: 10px;
     text-decoration: none;
@@ -37,4 +37,8 @@ a:hover {
 h1,
 h2 {
     text-align: center;
+}
+
+button{
+    
 }
