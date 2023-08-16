@@ -1,14 +1,14 @@
-// FavoriteService.js
 import makeRequest from './apiUtils';
 
-export const FavoriteService = () => {
-  const url = '/favorites'; // Cambia esto a tu endpoint correcto proporcionado por json-server
+const FavoriteService = {
+  baseURL: 'http://localhost:3005',
+  url: '/favorites',
 
-  return {
-    getAll: () => makeRequest('get', url),
-    getById: (id) => makeRequest('get', `${url}/${id}`),
-    create: (data) => makeRequest('post', url, data),
-    update: (id, data) => makeRequest('put', `${url}/${id}`, data),
-    remove: (id) => makeRequest('delete', `${url}/${id}`),
-  };
+  getAll: () => makeRequest(FavoriteService.baseURL, 'get', FavoriteService.url),
+  getById: (id) => makeRequest(FavoriteService.baseURL, 'get', `${FavoriteService.url}/${id}`),
+  create: (data) => makeRequest(FavoriteService.baseURL, 'post', FavoriteService.url, data),
+  remove: (id) => makeRequest(FavoriteService.baseURL, 'delete', `${FavoriteService.url}/${id}`),
+  update: (id, data) => makeRequest(FavoriteService.baseURL, 'put', `${FavoriteService.url}/${id}`, data),
 };
+
+export default FavoriteService;

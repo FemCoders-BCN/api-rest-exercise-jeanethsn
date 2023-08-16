@@ -1,17 +1,16 @@
-// LoremPicsumService.js
 import makeRequest from './apiUtils';
 
 export const LoremPicsumService = () => {
-  const urlGetAll = '/v2/list';
-  const urlGetById = '/id/{image}/{size}';
-  const urlGetGrayscale = '/{size}?grayscale';
+  const baseURL = 'https://picsum.photos';
+  const urls = {
+    getAll: '/v2/list',
+    getById: (id, size) => `/id/${id}/${size}`,
+    getRandomGrayscale: (size) => `/${size}?grayscale`,
+  };
 
   return {
-    getAll: () => makeRequest('get', urlGetAll),
-    getById: (id, size) => makeRequest('get', `${urlGetById}/${id}/${size}`),
-    getRandomGrayscale: (size) => {
-      const url = urlGetGrayscale.replace('{size}', size);
-      return makeRequest('get', url);
-    },
+    getAll: () => makeRequest(baseURL, 'get', urls.getAll),
+    getById: (id, size) => makeRequest(baseURL, 'get', urls.getById(id, size)),
+    getRandomGrayscale: (size) => makeRequest(baseURL, 'get', urls.getRandomGrayscale(size)),
   };
 };

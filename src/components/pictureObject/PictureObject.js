@@ -9,7 +9,7 @@ const PictureObject = ({ id, author, imageUrl, onAddToFavorites }) => {
       <p>ID: {id}</p>
       <p>Autor: {author}</p>
 
-      <Button className='action-buttons' text='Añadir a Favoritos'  onClick={onAddToFavorites} />
+      <Button className='action-buttons' text='Añadir a Favoritos' onClick={() => onAddToFavorites(id)} />
     </div>
   );
 };
