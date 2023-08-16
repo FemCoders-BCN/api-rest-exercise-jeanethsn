@@ -4,6 +4,7 @@ import './FavoriteImagesList.css'; // Importa tus estilos aquí
 
 const FavoriteImagesList = () => {
   const [favoriteImages, setFavoriteImages] = useState([]);
+  const [newFavorite, setNewFavorite] = useState({ id: '', author: '', imageUrl: '' });
 
   const fetchData = () => {
     FavoriteService.getAll()
@@ -30,9 +31,10 @@ const FavoriteImagesList = () => {
   };
 
   const handleCreateFavorite = () => {
-    FavoriteService.create({})
+    FavoriteService.create(newFavorite)
       .then(() => {
         fetchData();
+        setNewFavorite({ id: '', author: '', imageUrl: '' }); // Reiniciar el formulario después de agregar
       })
       .catch(error => {
         console.error('Error creating favorite:', error);
@@ -41,7 +43,31 @@ const FavoriteImagesList = () => {
 
   return (
     <div className="favorite-images-list">
-      <button className="create-button" onClick={handleCreateFavorite}>Crear Favorito</button>
+      <h2>Agregar Nueva Imagen Favorita</h2>
+      <form className="new-favorite-form">
+        <label htmlFor="id">ID:</label>
+        <input
+          id="id"
+          type="text"
+          value={newFavorite.id}
+          onChange={(e) => setNewFavorite({ ...newFavorite, id: e.target.value })}
+        />
+        <label htmlFor="author">Author:</label>
+        <input
+          id="author"
+          type="text"
+          value={newFavorite.author}
+          onChange={(e) => setNewFavorite({ ...newFavorite, author: e.target.value })}
+        />
+        <label htmlFor="imageUrl">Image URL:</label>
+        <input
+          id="imageUrl"
+          type="text"
+          value={newFavorite.imageUrl}
+          onChange={(e) => setNewFavorite({ ...newFavorite, imageUrl: e.target.value })}
+        />
+        <button className="create-button" onClick={handleCreateFavorite}>Crear Favorito</button>
+      </form>
       <ul className="image-list">
         {favoriteImages.map(image => (
           <li key={image.id} className="image-item">
